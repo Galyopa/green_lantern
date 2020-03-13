@@ -82,9 +82,8 @@ def multiple_ints_with_conversion(first_value: Any, second_value: Any) -> int:
         >>> "Not valid input data"
     """
     try:
-        first_value = int(first_value)
-        second_value = int(second_value)
-        return first_value * second_value
+        first, second = int(first_value), int(second_value)
+        return first * second
     except ValueError:
         print("Not valid input data")
         raise ValueError
@@ -147,10 +146,11 @@ def simple_sort(data: List[int]) -> List[list]:
         simple_sort([2, 9, 6, 7, 3, 2, 1])
         >>> [1, 2, 2, 3, 6, 7, 9]
     """
+    new_data = data.copy()
     n = 1
-    while n < len(data):
-        for i in range(len(data) - n):
-            if data[i] > data[i + 1]:
-                data[i], data[i + 1] = data[i + 1], data[i]
+    while n < len(new_data):
+        for i in range(len(new_data) - n):
+            if new_data[i] > new_data[i + 1]:
+                new_data[i], new_data[i + 1] = new_data[i + 1], new_data[i]
         n += 1
-    return data
+    return new_data
