@@ -38,8 +38,10 @@ class Cat:
 
     """
 
-    def __init__(self, age):
-        pass
+    def __init__(self, age, saturation_level=50):
+        self.age = int(input('How old is your cat ? ', ))
+        self.saturation_level = saturation_level
+
 
     def eat(self, product):
         pass
@@ -50,8 +52,9 @@ class Cat:
     def _increase_saturation_level(self, value):
         pass
 
-    def _set_average_speed(self):
+    def _set_average_speed(self, average_speed):
         pass
+
 
     def run(self, hours):
         pass
