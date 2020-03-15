@@ -43,24 +43,39 @@ class Cat:
         self.saturation_level = saturation_level
 
 
+
     def eat(self, product):
-        pass
+        product = input("Write the product you want to feed: Milk, Apple, Fodder. ")
+        if product == "Milk":
+            return saturation_level += 2
+        elif product == "Apple":
+            return saturation_level += 5
+        elif product == "Fodder":
+            return saturation_level += 10
+        return self.product
+
 
     def _reduce_saturation_level(self, value):
         pass
 
-    def _increase_saturation_level(self, value):
-        pass
+    def _increase_saturation_level(self, saturation_level):
+
+
 
     def _set_average_speed(self, average_speed):
-        pass
+        if 0 <= self.age <= 7:
+            return average_speed=12
+        elif 7 < self.age <= 10:
+            return  average_speed=9
+        elif self.age > 10:
+            return average_speed=6
 
 
     def run(self, hours):
         pass
 
     def get_saturation_level(self):
-        pass
+
 
     def get_average_speed(self):
         pass
