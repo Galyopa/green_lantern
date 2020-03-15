@@ -84,7 +84,7 @@ def multiple_ints_with_conversion(first_value: Any, second_value: Any) -> int:
     try:
         first, second = int(first_value), int(second_value)
         return first * second
-    except ValueError:
+    except (TypeError, ValueError):
         print("Not valid input data")
         raise ValueError
 
