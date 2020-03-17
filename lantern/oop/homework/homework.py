@@ -38,47 +38,64 @@ class Cat:
 
     """
 
-    def __init__(self, age, saturation_level=50):
+    def __init__(self, age):
         self.age = int(input('How old is your cat ? ', ))
-        self.saturation_level = saturation_level
+        self.saturation_level = 50
+        self.average_speed = 0
 
 
 
-    def eat(self, product):
+    def eat(self, calories):
         product = input("Write the product you want to feed: Milk, Apple, Fodder. ")
         if product == "Milk":
-            return saturation_level += 2
+            return self.calories(2)
         elif product == "Apple":
-            return saturation_level += 5
+            return self.calories(5)
         elif product == "Fodder":
-            return saturation_level += 10
-        return self.product
-
-
-    def _reduce_saturation_level(self, value):
-        pass
-
-    def _increase_saturation_level(self, saturation_level):
+            return self.calories(10)
+        
 
 
 
-    def _set_average_speed(self, average_speed):
+    def _reduce_saturation_level(self, calories):
+        self.saturation_level -= calories if self.saturation_level - calories <= 0 esle 0
+
+    def _increase_saturation_level(self,calories):
+        self.saturation_level += calories if self.saturation_level + calories >= 100 else 100
+
+
+
+    def _set_average_speed(self, km):
         if 0 <= self.age <= 7:
-            return average_speed=12
+            return self.average_speed=12
         elif 7 < self.age <= 10:
-            return  average_speed=9
+            return  self.average_speed=9
         elif self.age > 10:
-            return average_speed=6
+            return self.average_speed=6
 
 
     def run(self, hours):
-        pass
+        kilometers = self.average_speed * hours
+        if 0 <= kilometers <= 25:
+          self._reduce_saturation_level(2)
+        elif 25 < kilometers <= 50:
+          self._reduce_saturation_level(5)
+        elif 50 < kilometers <= 100:
+          self._reduce_saturation_level(15)
+        elif 100 < kilometers <= 200:
+          self._reduce_saturation_level(25)
+        elif kilometers > 200:
+          self._reduce_saturation_level(50)
+          
+        return f"Your cat ran {kilometers} kilometers"
+        
 
     def get_saturation_level(self):
+        return self.saturation_level if self.saturation_level > 0 else 'Your cat is died :('
 
 
     def get_average_speed(self):
-        pass
+        return self.average_speed
 
 
 class Cheetah:
