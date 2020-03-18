@@ -1,3 +1,5 @@
+import math 
+
 class Cat:
     """
     Write Class Cat which will receive age from user
@@ -39,19 +41,19 @@ class Cat:
     """
 
     def __init__(self, age):
-        self.age = int(input('How old is your cat ? ', ))
+        self.age = age
         self.saturation_level = 50
         self.average_speed = 0
 
 
 
     def eat(self, product):
-        product = input("Write the product you want to feed: Milk, Apple, Fodder. ")
-        if product == "Milk":
+        product = ["milk", "apple", "fodder"]
+        if product == "milk":
             return self._increase_saturation_level(2)
-        elif product == "Apple":
+        elif product == "apple":
             return self._increase_saturation_level(5)
-        elif product == "Fodder":
+        elif product == "fodder":
             return self._increase_saturation_level(10)
         
 
@@ -116,10 +118,10 @@ class Cheetah(Cat):
       super().__init__(age)
 
     def eat(self, calories):
-        product = input("Write the product you want to feed: Milk, Apple, Fodder. ")
-        if product == "Gazelle":
+        product = ["gazelle", "rabbit"]
+        if product == "gazelle":
             return self._increase_saturation_level(30)
-        elif product == "Rabbit":
+        elif product == "rabbit":
             return self._increase_saturation_level(15)
         
 
@@ -147,13 +149,17 @@ class Wall:
     """
 
     def __init__(self, width, height):
-        pass
+        self.width = width
+        self.height = height
 
-    def wall_square(self):
-        pass
+    def wall_square(self):        
+        return self.width * self.height
 
     def number_of_rolls_of_wallpaper(self, roll_width_m, roll_length_m):
-        pass
+        self.count_of_lines_in_roll = roll_length_m // self.height
+        self.count_of_lines = self.width // roll_width_m
+        self.update_count_of_line = math.ceil(self.count_of_lines)
+        return math.ceil(self.update_count_of_line / self.count_of_lines_in_roll)
 
 
 class Roof:
