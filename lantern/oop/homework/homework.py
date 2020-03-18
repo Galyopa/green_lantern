@@ -45,14 +45,14 @@ class Cat:
 
 
 
-    def eat(self, calories):
+    def eat(self, product):
         product = input("Write the product you want to feed: Milk, Apple, Fodder. ")
         if product == "Milk":
-            return self.calories(2)
+            return self._increase_saturation_level(2)
         elif product == "Apple":
-            return self.calories(5)
+            return self._increase_saturation_level(5)
         elif product == "Fodder":
-            return self.calories(10)
+            return self._increase_saturation_level(10)
         
 
 
@@ -98,7 +98,7 @@ class Cat:
         return self.average_speed
 
 
-class Cheetah:
+class Cheetah(Cat):
     """
     * Inherit from class Cat
 
@@ -112,7 +112,24 @@ class Cheetah:
       if age grosser 15(not including) return 40
 
     """
+    def __init__(self, age):
+      super().__init__(age)
 
+    def eat(self, calories):
+        product = input("Write the product you want to feed: Milk, Apple, Fodder. ")
+        if product == "Gazelle":
+            return self._increase_saturation_level(30)
+        elif product == "Rabbit":
+            return self._increase_saturation_level(15)
+        
+
+    def _set_average_speed(self, km):
+        if 0 <= self.age <= 5:
+            return self.average_speed=90
+        elif 5 < self.age <= 15:
+            return  self.average_speed=75
+        elif self.age > 15:
+            return self.average_speed=40
 
 class Wall:
     """
