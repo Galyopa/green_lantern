@@ -146,8 +146,8 @@ def task_10_list_first_10_customers(cur):
 
     Results: 10 records
     """
-    cur.execute("Select * FROM Customers")
-    return cur.fetchmany(10)
+    cur.execute("Select * FROM Customers LIMIT 10")
+    return cur.fetchall()
 
 
 def task_11_list_customers_starting_from_11th(cur):
@@ -159,7 +159,7 @@ def task_11_list_customers_starting_from_11th(cur):
 
     Returns: 11 records
     """
-    cur.execute("Select * FROM Customers WHERE customerid > 11")
+    cur.execute("Select * FROM Customers OFFSET 11")
     return cur.fetchall()
 
 
@@ -172,8 +172,8 @@ def task_12_list_suppliers_from_specified_countries(cur):
 
     Returns: 8 records
     """
-    cur.execute("SELECT supplierid, suppliername, contactname, city, country FROM suppliers WHERE country='USA' OR "
-                "country='UK' OR country='Japan'")
+    cur.execute("SELECT supplierid, suppliername, contactname, city, country FROM suppliers "
+                "WHERE country IN ('USA', 'UK', 'Japan')")
     return cur.fetchall()
 
 
