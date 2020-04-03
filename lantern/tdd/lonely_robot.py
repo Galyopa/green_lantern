@@ -15,6 +15,10 @@ class Robot:
         if self.y > self.asteroid.y:
             raise MissAsteroidError()
 
+    def check_robot_on_an_asteroid(self):
+        if self.x > self.asteroid.x or self.y > self.asteroid.y or self.x < 0 or self.y < 0:
+            raise RobotFallFromAsteroidError()
+
     def turn_left(self):
         turns = dict(E="N", N="W", W="S", S="E")
         self.direction = turns[self.direction]
@@ -27,15 +31,13 @@ class Robot:
         move_forward = dict(N=(self.x, self.y + 1), E=(self.x + 1, self.y), S=(self.x, self.y - 1),
                             W=(self.x - 1, self.y))
         self.x, self.y = move_forward[self.direction]
-        if self.x > self.asteroid.x or self.y > self.asteroid.y or self.x < 0 or self.y < 0:
-            raise RobotFallFromAsteroidError()
+        self.check_robot_on_an_asteroid()
 
     def move_backward(self):
         move_backward = dict(N=(self.x, self.y - 1), E=(self.x - 1, self.y), S=(self.x, self.y + 1),
                              W=(self.x + 1, self.y))
         self.x, self.y = move_backward[self.direction]
-        if self.x > self.asteroid.x or self.y > self.asteroid.y or self.x < 0 or self.y < 0:
-            raise RobotFallFromAsteroidError()
+        self.check_robot_on_an_asteroid()
 
 
 class MissAsteroidError(Exception):
