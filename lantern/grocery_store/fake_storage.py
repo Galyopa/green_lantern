@@ -51,10 +51,12 @@ class FakeGoods:
         self._id_counter = count(1)
 
     def add(self, goods):
+        count_add_goods = 0
         for product_id, product in enumerate(goods, start=1):
             product["id"] = product_id
             self._goods[product_id] = product
-        return len(goods)
+            count_add_goods += 1
+        return count_add_goods
 
     def get_product(self):
         return [self._goods[i] for i in range(1, len(self._goods) + 1)]
