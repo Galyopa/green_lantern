@@ -2,9 +2,9 @@ from flask import Flask
 
 from sqlalchemy_utils import create_database, database_exists
 
-from application.config import Config
-from application.populate_data import get_users, get_goods, get_stores
-from application.models.table_model import db, User, Product, Store
+from config import Config
+from populate_data import get_users, get_goods, get_stores
+from models.table_model import db, User, Product, Store
 
 
 def get_app():
@@ -19,6 +19,7 @@ def get_app():
         else:
             print(f"Database does not exists {db.engine.url}")
             create_database(db.engine.url)
+            db.create_all()
             print('Database created')
 
     with app.app_context():
@@ -41,3 +42,4 @@ def get_app():
             db.session.add(Store(**store))
         db.session.commit()
         print('Stores written in data_base successfully')
+    return app
