@@ -1,9 +1,16 @@
-from flask import request
+from flask import request, render_template, Blueprint
 from flask_restful import Resource, marshal
 
 from grocery_store.models import Good
 from grocery_store.database import db
 from grocery_store.routes.marshal_structure import goods_structure
+
+goods_page = Blueprint("goods_page", __name__)
+
+
+@goods_page.route('/goods_page')
+def get_all_goods():
+    return render_template('goods-page.html', goods=Good.query.all())
 
 
 class Goods(Resource):
