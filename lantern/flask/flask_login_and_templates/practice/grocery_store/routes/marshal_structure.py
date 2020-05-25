@@ -19,3 +19,15 @@ stores_structure = {
     "address": fields.String,
     "manager_id": fields.Integer,
 }
+orders_structure = {
+    "order_id": fields.Integer,
+    "user_id": fields.Integer,
+    "created_time": fields.DateTime,
+    "store_id": fields.Integer,
+
+}
+order_lines_structure = {
+    "order_line_id": fields.Integer,
+    "order_id": fields.Integer,
+    "good_id": fields.Integer,
+}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>
+    <h1>
+        <table class="table table-hover">
+            <tr>
+                <th>User ID</th>
+                <th>Created_time</th>
+                <th>Store_id</th>
+            </tr>
+            {% for line in orders_line %}
+            <tr>
+                <td> {{ line.order_id }}</td>
+                <td> {{ line.order_line_id }}</td>
+                <td> {{ line.good_id }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </h1>
+</h1>
+{% endblock %}
