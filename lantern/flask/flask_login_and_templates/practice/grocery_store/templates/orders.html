@@ -5,15 +5,21 @@
     <h1>
         <table class="table table-hover">
             <tr>
-                <th>User ID</th>
+                <th>Order ID</th>
                 <th>Created_time</th>
-                <th>Store_id</th>
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Total Price</th>
             </tr>
-            {% for line in orders_line %}
+            {% for order in orders %}
+            {% for item in order.order_lines %}
             <tr>
-                <td> {{ line.order_id }}</td>
-                <td> {{ line.order_line_id }}</td>
-                <td> {{ line.good_id }}</td>
+                <td> {{ order.order_id }}</td>
+                <td> {{ order.created_time }}</td>
+                <td> {{ item.good.name }}</td>
+                <td> {{ item.good.price }}</td>
+                {% endfor %}
+                <td> {{ item|sum(attribute='price') }} </td>
             </tr>
             {% endfor %}
         </table>

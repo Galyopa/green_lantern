@@ -5,7 +5,7 @@ from flask_login import LoginManager
 
 from grocery_store.config import Config
 from grocery_store.models import User
-from grocery_store.routes import users, goods, stores, auth, main, orders, order_lines
+from grocery_store.routes import users, goods, stores, auth, main, orders
 from grocery_store.database import db
 from grocery_store.commands import Populate, PopulateOrders
 
@@ -19,7 +19,6 @@ def make_app():
     app.register_blueprint(auth)
     app.register_blueprint(main)
     app.register_blueprint(orders)
-    app.register_blueprint(order_lines)
     return app
 
 
