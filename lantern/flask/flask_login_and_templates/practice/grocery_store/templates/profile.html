@@ -2,7 +2,24 @@
 
 {% block content %}
 <h1 class="title">
-  Welcome, {{ user }}!
-  Your email is {{ email }}
-</h1>
+    Welcome, {{ user }}!</h1>
+<h1> Your email is {{ email }}.</h1>
+
+<h2>
+    <table style="margin: auto" class="table">
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Address</th>
+        </tr>
+        {% for store in stores %}
+        <tr>
+            <td>{{ store.name }}</td>
+            <td>{{ store.city }}</td>
+            <td>{{ store.address }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</h2>
+
 {% endblock %}
