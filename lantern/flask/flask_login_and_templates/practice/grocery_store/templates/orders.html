@@ -19,7 +19,7 @@
                 <td> {{ item.good.name }}</td>
                 <td> {{ item.good.price }}</td>
                 {% endfor %}
-                <td> {{ item|sum(attribute='price') }} </td>
+                <td>{{ order.order_sum }}</td>
             </tr>
             {% endfor %}
         </table>

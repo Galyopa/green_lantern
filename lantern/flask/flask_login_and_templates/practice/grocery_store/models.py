@@ -4,6 +4,7 @@ from flask_login import UserMixin
 from sqlalchemy import DateTime
 
 from grocery_store.database import db
+from sqlalchemy_utils import aggregated
 
 
 class User(db.Model, UserMixin):
@@ -17,12 +18,12 @@ class User(db.Model, UserMixin):
     orders = db.relationship('Order', backref='user')
     manage_stores = db.relationship('Store', backref='user')
 
-
     def __repr__(self):
         return f"<id: {self.user_id}, name: {self.name}, email: {self.email}>"
 
     def get_id(self):
         return self.user_id
+
 
 class Good(db.Model):
     __tablename__ = "goods"
@@ -52,6 +53,10 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     created_time = db.Column(DateTime, default=datetime.datetime.utcnow)
     store_id = db.Column(db.Integer, db.ForeignKey("stores.store_id"), nullable=False)
+
+    @aggregated('order_sum', db.Column(db.Integer))
+    def order_sum(self):
+        return db.func.sum(Order.order_lines.good.price)
 
     order_lines = db.relationship('OrderLine', backref='order')
 
