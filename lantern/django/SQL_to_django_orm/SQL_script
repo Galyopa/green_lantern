@@ -1,0 +1,55 @@
+CREATE DATABASE myrestaurants;
+
+CREATE TABLE Restaurant
+(
+    RestaurantID SERIAL PRIMARY KEY,
+    Name         varchar(30),
+    Address      varchar(255)
+);
+
+CREATE TABLE Staff
+(
+    PersonID   SERIAL PRIMARY KEY ,
+    FirsName   varchar(40),
+    SecondName varchar(40),
+    Age        int,
+    Phone varchar(20) NOT NULL UNIQUE,
+    RestaurantID int NOT NULL,
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurant(RestaurantID)
+);
+
+CREATE TABLE Country
+(
+    CountryID SERIAL PRIMARY KEY,
+    Country   varchar(30)
+);
+
+CREATE TABLE City
+(
+    CityID SERIAL PRIMARY KEY,
+    City   varchar(30)
+);
+
+CREATE TABLE Dish
+(
+    DishID     SERIAL PRIMARY KEY,
+    NameOfDish varchar(30) UNIQUE,
+    Price      money
+);
+
+CREATE TABLE SummerMenu
+(
+    SummerMenuID SERIAL,
+    DishID       int NOT NULL,
+    PRIMARY KEY (SummerMenuID),
+    FOREIGN KEY (DishID) REFERENCES Dish (DishID)
+);
+
+
+CREATE TABLE Menu
+(
+    MenuDishID SERIAL,
+    DishID       int NOT NULL,
+    PRIMARY KEY (MenuDishID),
+    FOREIGN KEY (DishID) REFERENCES Dish (DishID)
+);
