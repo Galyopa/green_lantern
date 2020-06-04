@@ -71,8 +71,8 @@ class Car(BaseDateAuditModel):
     slug = models.SlugField(max_length=75)
     number = models.CharField(max_length=16, unique=True)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default=STATUS_PENDING, blank=True)
-    # dealer = models.ForeignKey('Dealer', on_delete=models.CASCADE, related_name='cars')
-
+    dealer = models.ForeignKey(to='Dealer', on_delete=models.CASCADE, related_name='cars')
+    color = models.ForeignKey(to='Color', on_delete=models.SET_NULL, null=True, blank=False)
     model = models.ForeignKey(to='CarModel', on_delete=models.SET_NULL, null=True, blank=False)
     extra_title = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Title second part'))
 
@@ -98,7 +98,6 @@ class Car(BaseDateAuditModel):
 
     def __str__(self):
         return self.title
-
 
     class Meta:
         verbose_name = _('Car')
