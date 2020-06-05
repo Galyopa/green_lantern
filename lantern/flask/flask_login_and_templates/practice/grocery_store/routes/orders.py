@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
 from flask_login import current_user, login_required
-from grocery_store.models import Order
 
 orders = Blueprint('orders', __name__)
 
@@ -8,6 +7,12 @@ orders = Blueprint('orders', __name__)
 @orders.route('/orders')
 @login_required
 def get_user_orders():
-    if current_user:
-        user_orders = Order.query.filter_by(user_id=current_user.user_id).all()
-        return render_template('orders.html', orders=user_orders)
+    orders_list = []
+    for order in current_user.orders:
+        order_data = {"store": order.store.name,
+                      "order_date": order.created_time,
+                      "order_price": sum([good.good.price for good in order.order_lines]),
+                      "order_goods": {good.good.name: good.good.price for good in order.order_lines}
+                      }
+        orders_list.append(order_data)
+    return render_template('orders.html', orders=orders_list)

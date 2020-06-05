@@ -1,11 +1,8 @@
 import datetime
+
 from flask_login import UserMixin
-
-from sqlalchemy import DateTime
-
 from grocery_store.database import db
-from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy_utils import aggregated
+from sqlalchemy import DateTime
 
 
 class User(db.Model, UserMixin):
@@ -54,14 +51,6 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     created_time = db.Column(DateTime, default=datetime.datetime.utcnow)
     store_id = db.Column(db.Integer, db.ForeignKey("stores.store_id"), nullable=False)
-
-    @hybrid_property
-    def order_price(self):
-        return sum(OrderLine.good.price for price in self.order_lines.good.price)
-
-    # @aggregated('order_sum', db.Column(db.Integer))
-    # def order_sum(self):
-    #     return db.func.sum(OrderLine.good.price)
 
     order_lines = db.relationship('OrderLine', backref='order')
 
