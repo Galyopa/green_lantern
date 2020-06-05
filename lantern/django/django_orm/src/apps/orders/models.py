@@ -18,7 +18,7 @@ class Order(BaseDateAuditModel):
         (STATUS_EXPECT_PAYMENT, "Expect payment"),
     )
 
-    car = models.ForeignKey(to='Car', on_delete=models.DO_NOTHING, null=True, blank=False)
+    car = models.ForeignKey(to='cars.Car', on_delete=models.DO_NOTHING, null=True, blank=False)
     views = models.PositiveIntegerField(default=0, editable=False)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default=STATUS_EXPECT_PAYMENT, blank=True)
     FirstName = models.CharField(max_length=30)
@@ -34,3 +34,7 @@ class Order(BaseDateAuditModel):
         indexes = [
             Index(fields=['status', ])
         ]
+
+
+
+

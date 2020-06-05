@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Index, UniqueConstraint
 from django.utils.translation import gettext_lazy as _
-
+from djmoney.models.fields import MoneyField
 from apps.cars.managers import CarManager, CarQuerySet
 from common.models import BaseDateAuditModel
 
@@ -71,13 +71,20 @@ class Car(BaseDateAuditModel):
     slug = models.SlugField(max_length=75)
     number = models.CharField(max_length=16, unique=True)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default=STATUS_PENDING, blank=True)
-    dealer = models.ForeignKey(to='Dealer', on_delete=models.CASCADE, related_name='cars')
+    dealer = models.ForeignKey(to='dealers.Dealer', on_delete=models.CASCADE, related_name='cars')
     color = models.ForeignKey(to='Color', on_delete=models.SET_NULL, null=True, blank=False)
     model = models.ForeignKey(to='CarModel', on_delete=models.SET_NULL, null=True, blank=False)
     extra_title = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Title second part'))
-
-    # other fields ...
-    #
+    engine_type = models.CharField(max_length=30, null=True, blank=True)
+    population_type = models.CharField(max_length=255)
+    price = MoneyField(max_digits=14, decimal_places=2, default_currency='USD')
+    fuel_type = models.CharField(max_length=30, null=True, blank=True)
+    doors = models.PositiveSmallIntegerField(default=4)
+    capacity = models.PositiveSmallIntegerField(default=4)
+    gear_case = models.CharField(max_length=30, null=True, blank=True, default='automatic')
+    sitting_place = models.PositiveSmallIntegerField(default=4)
+    firs_registration_date = models.DateTimeField(auto_now_add=False)
+    engine_power = models.DecimalField(max_digits=5, decimal_places=2)
 
     def save(self, *args, **kwargs):
         order_number_start = 7600000
@@ -106,3 +113,13 @@ class Car(BaseDateAuditModel):
         indexes = [
             Index(fields=['status', ])
         ]
+
+
+class CarProperty(models.Model):
+    property = models.ForeignKey(to='Property', on_delete=models.DO_NOTHING, null=True, blank=False)
+    car = models.ForeignKey(to='Car', on_delete=models.DO_NOTHING, null=True, blank=False)
+
+
+class Property(models.Model):
+    category = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=True)

@@ -1,7 +1,5 @@
 from django.db import models
-
-
-# Create your models here.
+from django.contrib.auth.models import User
 
 
 class Country(models.Model):
@@ -20,7 +18,10 @@ class City(models.Model):
         return self.name
 
 
-class Dealer(models.Model):  # унаследовать от юзера
+class Dealer(User):
     title = models.CharField(max_length=255)
-    email = models.EmailField(max_length=64, unique=True)
     city = models.ForeignKey(City, on_delete=models.DO_NOTHING)
+
+
+class NewsLetter(models.Model):
+    email = models.EmailField(max_length=64, unique=True)
