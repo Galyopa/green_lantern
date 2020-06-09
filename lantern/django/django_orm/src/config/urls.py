@@ -17,9 +17,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
+
+from apps.news_letters.views import NewsLetterView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('succes/', TemplateView.as_view(template_name="success_page.html"), name='success_page_url'),
+    path('newsletter/', NewsLetterView.as_view(), name='news_letter_url')
 ]
 
 if settings.DEBUG:
