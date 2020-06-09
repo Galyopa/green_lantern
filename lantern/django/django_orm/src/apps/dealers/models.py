@@ -23,5 +23,3 @@ class Dealer(User):
     city = models.ForeignKey(City, on_delete=models.DO_NOTHING)
 
 
-class NewsLetter(models.Model):
-    email = models.EmailField(max_length=64, unique=True)
