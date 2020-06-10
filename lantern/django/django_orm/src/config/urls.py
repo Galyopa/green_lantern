@@ -21,10 +21,14 @@ from django.views.generic import TemplateView
 
 from apps.news_letters.views import NewsLetterView
 
+from common.views import LoginView, logout_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('succes/', TemplateView.as_view(template_name="success_page.html"), name='success_page_url'),
-    path('newsletter/', NewsLetterView.as_view(), name='news_letter_url')
+    path('newsletter/', NewsLetterView.as_view(), name='news_letter_url'),
+    path('login/', LoginView.as_view(), name='login_page_url'),
+    path('logout/', logout_view, name='logout_url')
 ]
 
 if settings.DEBUG:
