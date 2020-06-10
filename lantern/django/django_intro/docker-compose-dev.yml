@@ -20,7 +20,7 @@ services:
       dockerfile: docker/containers/api.Dockerfile
     container_name: django_intro_api
     volumes:
-      - .:/django_intro
+        - .:/django_intro
     command: django_intro/docker/scripts/api.entrypoint.dev.sh
     env_file:
       - ./docker/envs/.env-local
