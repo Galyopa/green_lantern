@@ -1,11 +1,11 @@
-from django.http import HttpResponseRedirect
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-# Create your views here.
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import FormView, ListView
 
-from apps.articles.forms import SearchForm, ArticleForm
+from apps.articles.forms import ArticleForm
 from apps.articles.models import Article
 
 
@@ -45,3 +45,11 @@ class ArticlesListView(ListView):
     context_object_name = 'articles'
     paginate_by = 10
     queryset = Article.objects.all()
+
+
+def article_json(request, id):
+    return HttpResponse(serializers.serialize("json", [Article.objects.get(pk=id)]))
+
+
+def articles_list_json(request):
+    return JsonResponse(list(Article.objects.all().values()), safe=False)
