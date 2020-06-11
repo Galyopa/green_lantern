@@ -11,4 +11,4 @@ class SearchForm(forms.Form):
 class ArticleForm(ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'body']
+        fields = ['title', 'body', 'author', 'tags']
