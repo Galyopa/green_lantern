@@ -20,10 +20,14 @@ class LoginView(View):
                                 )
             if user:
                 login(request, user)
-                return HttpResponseRedirect(reverse('success_page_url'))
+                return HttpResponseRedirect(reverse('cars:cars_list'))
         return render(request, 'login_page.html', {'login_form': form})
 
 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('login_page_url'))
+
+
+def home_page(request):
+    return render(request, "base.html")

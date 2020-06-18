@@ -16,19 +16,20 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
 
 from apps.news_letters.views import NewsLetterView
-
-from common.views import LoginView, logout_view
+from common.views import LoginView, logout_view, home_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", home_page, name="homepage", ),
     path('succes/', TemplateView.as_view(template_name="success_page.html"), name='success_page_url'),
     path('newsletter/', NewsLetterView.as_view(), name='news_letter_url'),
     path('login/', LoginView.as_view(), name='login_page_url'),
-    path('logout/', logout_view, name='logout_url')
+    path('logout/', logout_view, name='logout_url'),
+    path('cars/', include('apps.cars.urls', namespace='cars')),
 ]
 
 if settings.DEBUG:
