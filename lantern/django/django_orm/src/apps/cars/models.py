@@ -99,13 +99,6 @@ class Car(BaseDateAuditModel):
         self.status = self.STATUS_ARCHIVED
         self.save()
 
-    @property
-    def title(self):
-        return f'{self.model.brand} {self.extra_title or ""}'  # do not show None
-
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = _('Car')
         verbose_name_plural = _('Cars')
