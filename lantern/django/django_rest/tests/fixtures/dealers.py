@@ -22,7 +22,7 @@ class CityFactory(factory.DjangoModelFactory):
 class AddressFactory(factory.DjangoModelFactory):
     address1 = fuzzy.FuzzyText()
     address2 = fuzzy.FuzzyText()
-    zip_code = fuzzy.FuzzyInteger(low=0, high=99999)
+    zip_code = fuzzy.FuzzyInteger(low=0, high=9999)
     city = factory.SubFactory(CityFactory)
 
     class Meta:

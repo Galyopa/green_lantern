@@ -11,6 +11,7 @@ class Country(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=32, db_index=True)
+    country = models.ForeignKey(to='Country', on_delete=models.CASCADE, null=True)
 
 
 class Address(models.Model):
@@ -22,4 +23,4 @@ class Address(models.Model):
 
 
 class Dealer(AbstractUser):
-    address = models.ForeignKey(to='Address', on_delete=models.CASCADE)
+    address = models.ForeignKey(to='Address', on_delete=models.CASCADE, null=True)

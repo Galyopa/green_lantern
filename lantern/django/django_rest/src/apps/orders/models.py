@@ -25,6 +25,7 @@ class Order(models.Model):
         indexes = [
             Index(fields=['status', ])
         ]
+        unique_together = (('email', 'car'),)
 
     def __str__(self):
         return f'{self.status.upper()} - {self.car}'
